@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <mvc:annotation-driven/>
+
+    <!-- 扫描Dao类包，应用Spring的注解配置 -->
+    <context:component-scan base-package="com.zhaoyan.webserver.dao"/>
+    <!-- 扫描Service类包，应用Spring的注解配置 -->
+    <context:component-scan base-package="com.zhaoyan.webserver.service"/>
+    <!-- 扫描Web类包，应用Spring的注解配置 -->
+    <context:component-scan base-package="com.zhaoyan.webserver.web"/>
+    <!-- 扫描Common类包，应用Spring的注解配置 -->
+    <context:component-scan base-package="com.zhaoyan.webserver.common"/>
+
+    <!-- 声明数据源 -->
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+    <!-- 定义一个使用DBCP实现的数据源 -->
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
+          destroy-method="close"
+          p:driverClassName="${jdbc.driverClassName}"
+          p:url="${jdbc.url}"
+          p:username="${jdbc.username}"
+          p:password="${jdbc.password}"/>
+
+    <!-- 定义JDBC模板Bean-->
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate"
+          p:dataSource-ref="dataSource"/>
+
+    <!-- 配置事务管理器 -->
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+          p:dataSource-ref="dataSource"/>
+    <!-- 通过AOP配置提供事务增强，让service包下所有bean的所有方法拥有事务-->
+    <aop:config proxy-target-class="true">
+        <aop:pointcut id="serviceMethod" expression=" execution(* com.zhaoyan.webserver.service..*(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethod"/>
+    </aop:config>
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="*"/>
+        </tx:attributes>
+    </tx:advice>
+
+
+</beans>

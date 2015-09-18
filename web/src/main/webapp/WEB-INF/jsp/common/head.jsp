@@ -8,12 +8,13 @@
 <base href="<%=basePath%>">
 
 <!-- 网站icon -->
-<link href="images/favicon.ico" rel="icon"/>
-<link href="images/favicon.ico" rel="shortcut icon"/>
+<link href="resources/images/favicon.ico" rel="icon"/>
+<link href="resources/images/favicon.ico" rel="shortcut icon"/>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="resources/framework/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-<script src="js/jquery-2.1.1.min.js" type="text/javascript"></script>
-<script src="js/bootstrap.min.js"></script>
+<script src="resources/framework/jquery/jquery-2.1.1.min.js" type="text/javascript"></script>
+<script src="resources/framework/bootstrap/js/bootstrap.min.js"></script>
+<script src="resources/framework/angular/angular.min.js"></script>

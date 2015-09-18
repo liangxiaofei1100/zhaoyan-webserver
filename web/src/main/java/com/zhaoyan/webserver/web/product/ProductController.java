@@ -1,12 +1,11 @@
 package com.zhaoyan.webserver.web.product;
 
-import com.zhaoyan.webserver.domain.product.http.ProductListRequest;
 import com.zhaoyan.webserver.domain.product.http.ProductListResponse;
-import com.zhaoyan.webserver.service.product.ProductAddService;
-import com.zhaoyan.webserver.service.product.ProductListService;
+import com.zhaoyan.webserver.service.product.ProductService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -14,11 +13,10 @@ import java.util.Map;
 @Controller
 @RequestMapping("/product")
 public class ProductController {
+    Logger logger = LoggerFactory.getLogger(ProductController.class);
 
     @Autowired
-    ProductListService productListService;
-    @Autowired
-    ProductAddService productAddService;
+    ProductService productService;
 
     /**
      * 获取商品列表Json格式数据。
@@ -26,7 +24,9 @@ public class ProductController {
     @RequestMapping(value = "/list", produces = {"application/json;charset=UTF-8"}, method = RequestMethod.GET,
             consumes="application/json")
     public @ResponseBody ProductListResponse getProductListJson() {
-        return productListService.getProductList();
+        ProductListResponse response = productService.getProductList();
+        logger.debug("getProductListJson: " +response.toString());
+        return response;
     }
 
     /**
@@ -34,13 +34,13 @@ public class ProductController {
      */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String getProductListPage() {
-        return "product";
+        return "product_list";
     }
 
     /**
      * 处理/product/view/{productId}形式的URL
      */
-    @RequestMapping(value = "view/{productId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/view/{productId}", method = RequestMethod.GET)
     public String viewProduct(@PathVariable("productId") Integer productId, Map<String, Object> model) {
 
         model.put("product", null);

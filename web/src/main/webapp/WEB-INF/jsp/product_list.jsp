@@ -5,7 +5,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="zh">
 <head>
-    <title>标题</title>
+    <title>商品列表</title>
 
     <%@include file="common/head.jsp" %>
     <style type="text/css">
@@ -14,6 +14,10 @@
             padding-left: 50px;
             padding-right: 50px;
             padding-bottom: 50px;
+        }
+
+        .table th, .table td {
+            text-align: center;
         }
     </style>
 </head>
@@ -29,7 +33,7 @@
             url: urlStr,
             contentType: "application/json; charset=utf-8",
             success: function (data) {
-                //alert("Success:"+JSON.stringify(data));
+                // alert("Success:"+JSON.stringify(data));
                 // 添加数据到Table中。
                 var productList = data.productList;
                 $.each(productList, function (index, product) {

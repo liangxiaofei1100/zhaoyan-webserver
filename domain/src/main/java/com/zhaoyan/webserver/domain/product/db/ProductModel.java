@@ -5,4 +5,5 @@ public class ProductModel {
     public String name;
     public String description;
     public int number;
+    public String imageUrl;
 }

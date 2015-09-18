@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class ProductListDao {
+public class ProductDao {
 
     @Autowired
     JdbcTemplate jdbcTemplate;
@@ -30,6 +30,7 @@ public class ProductListDao {
                 product.name = resultSet.getString("name");
                 product.description = resultSet.getString("description");
                 product.number = resultSet.getInt("number");
+                product.imageUrl = resultSet.getString("imageUrl");
                 productModelList.add(product);
             }
         });

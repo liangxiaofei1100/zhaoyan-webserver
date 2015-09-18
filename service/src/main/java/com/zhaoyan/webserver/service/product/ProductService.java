@@ -1,7 +1,7 @@
 package com.zhaoyan.webserver.service.product;
 
 
-import com.zhaoyan.webserver.dao.product.ProductListDao;
+import com.zhaoyan.webserver.dao.product.ProductDao;
 import com.zhaoyan.webserver.domain.product.db.ProductModel;
 import com.zhaoyan.webserver.domain.product.http.ProductListResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class ProductListService {
+public class ProductService {
 
     @Autowired
-    ProductListDao productListDao;
+    ProductDao productListDao;
 
     public ProductListResponse getProductList() {
         List<ProductModel> productModels = productListDao.getProductList();
@@ -25,6 +25,7 @@ public class ProductListService {
             product.name = productModel.name;
             product.description = productModel.description;
             product.number = productModel.number;
+            product.imageUrl = productModel.imageUrl;
             products.add(product);
         }
 

@@ -3,13 +3,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html ng-app="zhaoyanApp">
+<html ng-app="ZhaoyanApp">
 <head>
     <title>主页</title>
 
     <%@include file="common/head.jsp" %>
     <script src="resources/js/app.js"></script>
     <script src="resources/js/controllers.js"></script>
+    <script src="resources/framework/angular/angular-ui-router.min.js"></script>
 
     <style type="text/css">
         .body-div {
@@ -26,17 +27,13 @@
 
 <div class="body-div">
     <div>
-        <%
-            java.text.SimpleDateFormat simpleDateFormat = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            java.util.Date currentTime = new java.util.Date();
-            String time = simpleDateFormat.format(currentTime);
-        %>
-        <h1>欢迎来到Web主页，当前时间：<%= time %>
+        <h1 ng-controller="TimeController">
+            欢迎来到Web主页，当前时间：<span ng-bind="clock.now | date:'yyyy-MM-dd HH:mm:ss'"></span>
         </h1>
     </div>
 
     <div ng-controller="GreetingController">
-        <p>{{greeting.message}}</p>
+        <p><span ng-bind="greeting.message"></span></p>
     </div>
 </div>
 </body>

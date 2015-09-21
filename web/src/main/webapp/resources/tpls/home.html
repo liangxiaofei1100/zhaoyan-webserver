@@ -1,4 +1,12 @@
-<h1>State 1</h1>
-<hr/>
-<a ui-sref="home.list">Show List</a>
-<div ui-view></div>
+<!-- 主页内容 -->
+<div class="body-div">
+    <div>
+        <h1 ng-controller="TimeController">
+            欢迎来到Web主页，当前时间：<span ng-bind="clock.now | date:'yyyy-MM-dd HH:mm:ss'"></span>
+        </h1>
+    </div>
+
+    <div ng-controller="GreetingController">
+        <p><span ng-bind="greeting.message"></span></p>
+    </div>
+</div>

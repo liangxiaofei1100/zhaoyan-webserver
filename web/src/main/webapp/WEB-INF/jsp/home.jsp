@@ -1,40 +1,70 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" errorPage="error.jsp" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html ng-app="ZhaoyanApp">
 <head>
     <title>主页</title>
 
-    <%@include file="common/head.jsp" %>
-    <script src="resources/js/app.js"></script>
-    <script src="resources/js/controllers.js"></script>
+    <%
+        String path = request.getContextPath();
+        // 当前应用的路径
+        String basePath = request.getScheme() + "://" + request.getServerName() + ":" +
+                request.getServerPort() + path + "/";
+    %>
+    <base href="<%=basePath%>">
+
+    <!-- 网站icon -->
+    <link href="resources/images/favicon.ico" rel="icon"/>
+    <link href="resources/images/favicon.ico" rel="shortcut icon"/>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="resources/framework/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="resources/css/common.css" rel="stylesheet">
+
+    <script src="resources/framework/jquery/jquery-2.1.1.min.js" type="text/javascript"></script>
+    <script src="resources/framework/bootstrap/js/bootstrap.min.js"></script>
+    <script src="resources/framework/angular/angular.min.js"></script>
     <script src="resources/framework/angular/angular-ui-router.min.js"></script>
 
-    <style type="text/css">
-        .body-div {
-            padding-top: 70px;
-            padding-left: 50px;
-            padding-right: 50px;
-            padding-bottom: 50px;
-        }
-    </style>
+    <script src="resources/js/app.js"></script>
+    <script src="resources/js/controllers.js"></script>
 </head>
 
 <body>
-<%@include file="common/navigation_bar.jsp" %>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand">朝颜</a>
+        </div>
 
-<div class="body-div">
-    <div>
-        <h1 ng-controller="TimeController">
-            欢迎来到Web主页，当前时间：<span ng-bind="clock.now | date:'yyyy-MM-dd HH:mm:ss'"></span>
-        </h1>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li ui-sref-active="active"><a ui-sref="home" >主页</a></li>
+                <li ui-sref-active="active"><a ui-sref="product">商品</a></li>
+                <li ui-sref-active="active"><a ui-sref="userinfo">用户信息</a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
     </div>
+    <!-- /.container-fluid -->
+</nav>
 
-    <div ng-controller="GreetingController">
-        <p><span ng-bind="greeting.message"></span></p>
-    </div>
+<div style="padding-top: 70px; padding-bottom: 50px;">
+
+    <!-- views will be injected here -->
+    <div ui-view></div>
+
 </div>
 </body>
 </html>

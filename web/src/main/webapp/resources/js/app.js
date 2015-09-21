@@ -11,22 +11,12 @@ zhaoyanApp.config(function ($stateProvider, $urlRouterProvider) {
             url:"/home",
             templateUrl:"resources/tpls/home.html"
         })
-        .state('home.list', {
-            url:"/list",
-            templateUrl:"resources/tpls/home.list.html",
-            controller: function($scope) {
-                $scope.items = ["A", "List", "Of", "Items"];
-            }
-        })
         .state('product',{
             url:"/product",
             templateUrl:"resources/tpls/product.html"
         })
-        .state('product.list',{
-            url:"list",
-            templateUrl:"resources/tpls/product.list.html",
-            controller: function($scope) {
-                $scope.things = ["A", "Set", "Of", "Things"];
-            }
+        .state('userinfo',{
+            url:"/userinfo",
+            templateUrl:"resources/tpls/userinfo.html",
         })
 });

@@ -21,20 +21,11 @@ public class ProductController {
     /**
      * 获取商品列表Json格式数据。
      */
-    @RequestMapping(value = "/list", produces = {"application/json;charset=UTF-8"}, method = RequestMethod.GET,
-            consumes="application/json")
+    @RequestMapping(value = "/list", produces = {"application/json;charset=UTF-8"}, method = RequestMethod.GET)
     public @ResponseBody ProductListResponse getProductListJson() {
         ProductListResponse response = productService.getProductList();
         logger.debug("getProductListJson: " +response.toString());
         return response;
-    }
-
-    /**
-     * 获取商品列表页面
-     */
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public String getProductListPage() {
-        return "product_list";
     }
 
     /**

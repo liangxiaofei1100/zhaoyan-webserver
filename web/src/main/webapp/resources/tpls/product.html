@@ -5,34 +5,7 @@
     }
 </style>
 
-<!--<script type="text/javascript">-->
-    <!--jQuery(function ($) {-->
-        <!--var urlStr = "product/list";-->
-        <!--//alert("Before Call:"+urlStr);-->
-        <!--$.ajax({-->
-            <!--method: "GET",-->
-            <!--url: urlStr,-->
-            <!--contentType: "application/json; charset=utf-8",-->
-            <!--success: function (data) {-->
-                <!--// alert("Success:"+JSON.stringify(data));-->
-                <!--// 添加数据到Table中。-->
-                <!--var productList = data.productList;-->
-                <!--$.each(productList, function (index, product) {-->
-                    <!--// "id":1,"name":"苹果","description":"一种水果","number":100-->
-                    <!--var trHtml = "<tr>" +-->
-                            <!--"<td>" + product.id + "</td>" +-->
-                            <!--"<td>" + product.name + "</td>" +-->
-                            <!--"<td>" + product.description + "</td>" +-->
-                            <!--"<td>" + product.number + "</td>" +-->
-                            <!--"</tr>";-->
-                    <!--$("#productTableBody").append(trHtml);-->
-                <!--});-->
-            <!--}-->
-        <!--}); // end ajax-->
-    <!--});-->
-<!--</script>-->
-
-<div class="body-div">
+<div class="container">
     <div>
         <table class="table table-striped table-bordered" ng-controller="ProductList">
             <thead>
@@ -41,6 +14,7 @@
                 <th>名称</th>
                 <th>描述</th>
                 <th>数量</th>
+                <th>操作</th>
             </tr>
             </thead>
             <tbody>
@@ -50,6 +24,7 @@
                 <td>{{product.name}}</td>
                 <td>{{product.description}}</td>
                 <td>{{product.number}}</td>
+                <td><a ui-sref="product_detail">查看详情</a></td>
             </tr>
             </tbody>
         </table>

@@ -1,5 +1,7 @@
 package com.zhaoyan.webserver.web.product;
 
+import com.zhaoyan.webserver.domain.product.http.AddProductRequest;
+import com.zhaoyan.webserver.domain.product.http.AddProductResponse;
 import com.zhaoyan.webserver.domain.product.http.ProductListResponse;
 import com.zhaoyan.webserver.service.product.ProductService;
 import org.slf4j.Logger;
@@ -36,5 +38,15 @@ public class ProductController {
 
         model.put("product", null);
         return "product";
+    }
+
+    /**
+     * 添加一个商品
+     */
+    @RequestMapping(value = "/addProduct", produces = {"application/json;charset=UTF-8"}, method = RequestMethod.POST)
+    public @ResponseBody AddProductResponse addProduct(@RequestBody AddProductRequest addProductRequest) {
+        AddProductResponse response = new AddProductResponse();
+        logger.debug("addProductRequest: " + addProductRequest.product.name + addProductRequest.product.description + addProductRequest.product.number);
+        return response;
     }
 }

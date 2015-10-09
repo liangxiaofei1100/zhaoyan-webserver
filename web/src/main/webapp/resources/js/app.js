@@ -15,8 +15,20 @@ zhaoyanApp.config(function ($stateProvider, $urlRouterProvider) {
             url:"/product",
             templateUrl:"resources/tpls/product.html"
         })
+        .state('product_detail',{
+            url:"/product_detail",
+            templateUrl:"resources/tpls/product_detail.html"
+        })
         .state('userinfo',{
             url:"/userinfo",
             templateUrl:"resources/tpls/userinfo.html",
+        })
+        .state('add_product', {
+            url: '/add_product',
+            templateUrl: 'resources/tpls/add_product.html'
+        })
+        .state('test', {
+            url:'/test',
+            templateUrl: 'resources/tpls/test.html'
         })
 });

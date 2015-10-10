@@ -2,13 +2,14 @@ package com.zhaoyan.webserver.service.product;
 
 
 import com.zhaoyan.webserver.dao.product.ProductDao;
-import com.zhaoyan.webserver.domain.product.db.ProductModel;
+import com.zhaoyan.webserver.domain.product.db.Product;
 import com.zhaoyan.webserver.domain.product.http.AddProductRequest;
 import com.zhaoyan.webserver.domain.product.http.AddProductResponse;
 import com.zhaoyan.webserver.domain.product.http.ProductListResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,13 +18,15 @@ import java.util.List;
 @Service
 public class ProductService {
     Logger logger = LoggerFactory.getLogger(ProductService.class);
+
     @Autowired
+    @Qualifier("hibernateProductDao")
     ProductDao productDao;
 
     public ProductListResponse getProductList() {
-        List<ProductModel> productModels = productDao.getProductList();
+        List<Product> productModels = productDao.getProductList();
         List<ProductListResponse.Product> products = new ArrayList<>();
-        for (ProductModel productModel : productModels) {
+        for (Product productModel : productModels) {
             ProductListResponse.Product product = new ProductListResponse.Product();
             product.id = productModel.id;
             product.name = productModel.name;
@@ -41,12 +44,12 @@ public class ProductService {
 
 
     public AddProductResponse addProduct(AddProductRequest addProductRequest) {
-        ProductModel productModel = new ProductModel();
-        productModel.name = addProductRequest.product.name;
-        productModel.number = addProductRequest.product.number;
-        productModel.description = addProductRequest.product.description;
-        int id = productDao.addProduct(productModel);
-        logger.debug("addProduct(): id=" + id);
+        Product product = new Product();
+        product.name = addProductRequest.product.name;
+        product.number = addProductRequest.product.number;
+        product.description = addProductRequest.product.description;
+        productDao.addProduct(product);
+
         AddProductResponse response = new AddProductResponse();
         response.buildOk();
         return response;

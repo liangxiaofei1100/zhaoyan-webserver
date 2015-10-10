@@ -25,4 +25,11 @@ public class Response {
         header.resultCode = resultCode;
         header.resultText = resultText;
     }
+
+    @Override
+    public String toString() {
+        return "Response{" +
+                "header=" + header +
+                '}';
+    }
 }

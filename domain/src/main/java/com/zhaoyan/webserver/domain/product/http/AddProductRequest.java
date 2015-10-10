@@ -10,5 +10,21 @@ public class AddProductRequest extends Request {
         public String name;
         public String description;
         public int number;
+
+        @Override
+        public String toString() {
+            return "Product{" +
+                    "name='" + name + '\'' +
+                    ", description='" + description + '\'' +
+                    ", number=" + number +
+                    '}';
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "AddProductRequest{" +
+                "product=" + product +
+                '}';
     }
 }

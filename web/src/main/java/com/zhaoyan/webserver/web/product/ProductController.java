@@ -45,8 +45,9 @@ public class ProductController {
      */
     @RequestMapping(value = "/addProduct", produces = {"application/json;charset=UTF-8"}, method = RequestMethod.POST)
     public @ResponseBody AddProductResponse addProduct(@RequestBody AddProductRequest addProductRequest) {
-        AddProductResponse response = new AddProductResponse();
-        logger.debug("addProductRequest: " + addProductRequest.product.name + addProductRequest.product.description + addProductRequest.product.number);
+        logger.debug("AddProductRequest: " + addProductRequest);
+        AddProductResponse response = productService.addProduct(addProductRequest);
+        logger.debug("AddProductResponse: " + response);
         return response;
     }
 }

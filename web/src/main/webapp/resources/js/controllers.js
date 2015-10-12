@@ -11,7 +11,7 @@ controllers.controller('GreetingController', function ($scope, $http) {
         });
 });
 
-controllers.controller('ProductList', function ($scope, $http) {
+controllers.controller('ProductList', function ($scope, $http, $location) {
     $http({method: 'GET', url: 'product/list'})
         .success(function (data, status, headers, config) {
             //alert("Success:" + JSON.stringify(data));

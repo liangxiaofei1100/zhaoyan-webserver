@@ -21,6 +21,24 @@ controllers.controller('ProductList', function ($scope, $http) {
         .error(function (data, status, headers, config) {
             //alert("Error:" + data);
         });
+    $scope.viewProduct = function(productId) {
+        console.log("viewProduct(), productId=" + productId);
+        $location.path("/product_view/" + productId);
+    };
+
+    $scope.editProduct = function(productId) {
+        console.log("editProduct(), productId=" + productId);
+    };
+
+    $scope.deleteProduct = function(productId) {
+        console.log("deleteProduct(), productId=" + productId);
+    }
+});
+
+controllers.controller('ProductView', function($scope, $http) {
+    //var productId = $routeParams.productId;
+    //console.log("ProductView, productId=" + productId);
+
 });
 
 controllers.controller('TimeController', function ($scope) {

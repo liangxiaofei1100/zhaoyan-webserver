@@ -53,7 +53,7 @@
                 <li ui-sref-active="active"><a ui-sref="home" >主页</a></li>
                 <li ui-sref-active="active"><a ui-sref="product">商品</a></li>
                 <li ui-sref-active="active"><a ui-sref="userinfo">用户信息</a></li>
-                <li ui-sref-active="active"><a ui-sref="add_product">新增商品</a></li>
+                <li ui-sref-active="active"><a ui-sref="product_add">新增商品</a></li>
                 <li ui-sref-active="active"><a ui-sref="test">测试</a></li>
             </ul>
         </div>

@@ -24,7 +24,11 @@
                 <td>{{product.name}}</td>
                 <td>{{product.description}}</td>
                 <td>{{product.number}}</td>
-                <td><a ui-sref="product_detail">查看详情</a></td>
+                <td>
+                    <button type="button" class="btn btn-default btn-sm" ng-click="viewProduct(product.id)">查看详情</button>
+                    <button type="button" class="btn btn-primary btn-sm" ng-click="editProduct(product.id)">编辑</button>
+                    <button type="button" class="btn btn-danger btn-sm" ng-click="deleteProduct(product.id)">删除</button>
+                </td>
             </tr>
             </tbody>
         </table>

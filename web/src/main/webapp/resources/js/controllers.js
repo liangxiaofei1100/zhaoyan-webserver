@@ -37,34 +37,42 @@ controllers.controller('ProductList', function ($scope, $http, $state) {
         .error(function (data, status, headers, config) {
             console.log("ProductList, Error:" + data);
         });
-    $scope.viewProduct = function(productId) {
+    $scope.viewProduct = function (productId) {
         console.log("viewProduct(), productId=" + productId);
-        $state.go("product_view", { productId: productId });
+        $state.go("product_view", {productId: productId});
     };
 
-    $scope.editProduct = function(productId) {
+    $scope.editProduct = function (productId) {
         console.log("editProduct(), productId=" + productId);
-        $state.go("product_edit", { productId: productId });
+        $state.go("product_edit", {productId: productId});
     };
 
-    $scope.deleteProduct = function(productId) {
+    $scope.deleteProduct = function (productId) {
         console.log("deleteProduct(), productId=" + productId);
     }
 });
 
 // 商品详情
-controllers.controller('ProductView', function($scope, $http, $state, $stateParams, $window) {
+controllers.controller('ProductView', function ($scope, $http, $state, $stateParams, $window) {
     var productId = $stateParams.productId;
     console.log("ProductView, productId=" + productId);
 
-    $scope.goBack = function() {
-        console.log("goBack()")
+    $http.get('product/view/' + productId)
+        .success(function (data, status, headers, config) {
+            console.log(data);
+            $scope.product = data;
+        })
+        .error(function (data, status, headers, config) {
+            console.log(data)
+        });
+
+    $scope.goBack = function () {
         $window.history.back();
     };
 });
 
 // 编辑商品
-controllers.controller('ProductEdit', function($scope, $http, $stateParams) {
+controllers.controller('ProductEdit', function ($scope, $http, $stateParams) {
     var productId = $stateParams.productId;
     console.log("ProductEdit, productId=" + productId)
 
@@ -129,11 +137,10 @@ controllers.controller('UserInfoCtrl', function ($scope) {
 // 测试
 controllers.controller('Test', function ($scope) {
     var testJson = {
-        name : "Test name",
-        message : "Test message"
+        name: "Test name",
+        message: "Test message"
     }
     var testJsonString = angular.toJson(testJson, false);
-
 
 
     $scope.str = testJsonString;

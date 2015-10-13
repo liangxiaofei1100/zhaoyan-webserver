@@ -17,9 +17,31 @@ public interface ProductDao {
     List<Product> getProductList();
 
     /**
+     * 根据商品Id获得商品信息
+     *
+     * @param productId 商品ID
+     * @return 商品数据
+     */
+    Product getProductById(long productId);
+
+    /**
+     * 删除一个商品
+     *
+     * @param productId 商品Id
+     */
+    void deleteProduct(long productId);
+
+    /**
      * 添加一个商品
      *
      * @param product 商品数据
      */
     void addProduct(Product product);
+
+    /**
+     * 修改一个商品
+     *
+     * @param product 商品数据
+     */
+    void updateProduct(Product product);
 }

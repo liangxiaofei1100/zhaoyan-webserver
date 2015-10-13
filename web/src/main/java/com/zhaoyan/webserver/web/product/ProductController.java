@@ -3,6 +3,7 @@ package com.zhaoyan.webserver.web.product;
 import com.zhaoyan.webserver.domain.product.http.AddProductRequest;
 import com.zhaoyan.webserver.domain.product.http.AddProductResponse;
 import com.zhaoyan.webserver.domain.product.http.ProductListResponse;
+import com.zhaoyan.webserver.domain.product.http.ViewProductResponse;
 import com.zhaoyan.webserver.service.product.ProductService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,13 +32,14 @@ public class ProductController {
     }
 
     /**
+     * 获取商品详情Json格式数据
      * 处理/product/view/{productId}形式的URL
      */
-    @RequestMapping(value = "/view/{productId}", method = RequestMethod.GET)
-    public String viewProduct(@PathVariable("productId") Integer productId, Map<String, Object> model) {
+    @RequestMapping(value = "/view/{productId}", method = RequestMethod.GET, produces = {"application/json;charset=UTF-8"})
+    public @ResponseBody ViewProductResponse viewProductJson(@PathVariable("productId") Integer productId) {
 
-        model.put("product", null);
-        return "product";
+
+        return null;
     }
 
     /**

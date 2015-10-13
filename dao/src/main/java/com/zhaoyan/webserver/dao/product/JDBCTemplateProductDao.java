@@ -11,7 +11,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * 已不再使用
+ */
 @Repository
 public class JDBCTemplateProductDao implements ProductDao {
 
@@ -41,9 +43,24 @@ public class JDBCTemplateProductDao implements ProductDao {
     }
 
     @Override
+    public Product getProductById(long productId) {
+        return null;
+    }
+
+    @Override
+    public void deleteProduct(long productId) {
+
+    }
+
+    @Override
     public void addProduct(Product product) {
         String sql = "INSERT INTO product (name,description,number) VALUES (?,?,?)";
         Object[] params = new Object[]{product.name, product.description, product.number};
         jdbcTemplate.update(sql, params);
+    }
+
+    @Override
+    public void updateProduct(Product product) {
+
     }
 }

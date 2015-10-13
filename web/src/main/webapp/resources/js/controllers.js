@@ -28,15 +28,8 @@ controllers.controller('TimeController', function ($scope) {
 
 // 商品列表
 controllers.controller('ProductList', function ($scope, $http, $state) {
-    $http({method: 'GET', url: 'product/list'})
-        .success(function (data, status, headers, config) {
-            // console.log("ProductList, Success:" + JSON.stringify(data));
-            $scope.productList = data.productList;
+    getProductList();
 
-        })
-        .error(function (data, status, headers, config) {
-            log("ProductList, Error:" + data)
-        });
     // 查看商品详情
     $scope.viewProduct = function (productId) {
         log("viewProduct(), productId=" + productId)
@@ -51,12 +44,38 @@ controllers.controller('ProductList', function ($scope, $http, $state) {
     $scope.deleteProduct = function (productId) {
         log("deleteProduct(), productId=" + productId);
 
+        //confirm("删除商品, ID: " + productId)
+        deleteProduct(productId);
+    }
+
+    /**
+     * 发送请求，获得商品列表
+     */
+    function getProductList() {
+        $http({method: 'GET', url: 'product/list'})
+            .success(function (data, status, headers, config) {
+                // console.log("ProductList, Success:" + JSON.stringify(data));
+                $scope.productList = data.productList;
+
+            })
+            .error(function (data, status, headers, config) {
+                log("ProductList, Error:" + data)
+            });
+    }
+
+    /**
+     * 发送请求，删除商品
+     * @param productId
+     */
+    function deleteProduct(productId) {
         var deleteProductRequest = {
             productId : productId
         }
         $http.post('product/delete', deleteProductRequest)
             .success(function (data, status, headers, config) {
                 log(data);
+                // 重新加载数据
+                getProductList();
             })
             .error(function (data, status, headers, config) {
                 log(data)
@@ -153,7 +172,6 @@ controllers.controller('Test', function ($scope) {
         message: "Test message"
     }
     var testJsonString = angular.toJson(testJson, false);
-
 
     $scope.str = testJsonString;
 });

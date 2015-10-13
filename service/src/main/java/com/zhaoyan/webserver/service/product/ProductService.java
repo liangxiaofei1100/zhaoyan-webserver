@@ -69,7 +69,7 @@ public class ProductService {
      */
     public AddProductResponse addProduct(AddProductRequest addProductRequest) {
         Product product = new Product();
-        copierAddProductResponseToProduct.copy(addProductRequest, product, null);
+        copierAddProductResponseToProduct.copy(addProductRequest.product, product, null);
         productDao.addProduct(product);
 
         AddProductResponse response = new AddProductResponse();

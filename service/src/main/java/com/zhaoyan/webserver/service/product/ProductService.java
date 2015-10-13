@@ -3,10 +3,7 @@ package com.zhaoyan.webserver.service.product;
 
 import com.zhaoyan.webserver.dao.product.ProductDao;
 import com.zhaoyan.webserver.domain.product.db.Product;
-import com.zhaoyan.webserver.domain.product.http.AddProductRequest;
-import com.zhaoyan.webserver.domain.product.http.AddProductResponse;
-import com.zhaoyan.webserver.domain.product.http.ProductListResponse;
-import com.zhaoyan.webserver.domain.product.http.ViewProductResponse;
+import com.zhaoyan.webserver.domain.product.http.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,5 +75,12 @@ public class ProductService {
         AddProductResponse response = new AddProductResponse();
         response.buildOk();
         return response;
+    }
+
+    /**
+     * 删除商品
+     */
+    public void deleteProduct(DeleteProductRequest request) {
+        productDao.deleteProductById(request.productId);
     }
 }

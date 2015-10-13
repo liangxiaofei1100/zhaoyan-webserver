@@ -29,7 +29,7 @@ public interface ProductDao {
      *
      * @param productId 商品Id
      */
-    void deleteProduct(long productId);
+    void deleteProductById(long productId);
 
     /**
      * 添加一个商品

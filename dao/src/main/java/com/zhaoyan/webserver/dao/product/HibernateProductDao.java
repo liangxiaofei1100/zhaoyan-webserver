@@ -25,9 +25,12 @@ public class HibernateProductDao implements ProductDao{
     }
 
     @Override
-    public void deleteProduct(long productId) {
+    public void deleteProductById(long productId) {
         Product product = hibernateTemplate.get(Product.class, productId);
-        hibernateTemplate.delete(product);
+        // 如果商品不存在，就不处理。
+        if (product != null) {
+            hibernateTemplate.delete(product);
+        }
     }
 
     @Override

@@ -48,7 +48,7 @@ public class JDBCTemplateProductDao implements ProductDao {
     }
 
     @Override
-    public void deleteProduct(long productId) {
+    public void deleteProductById(long productId) {
 
     }
 

@@ -35,20 +35,32 @@ controllers.controller('ProductList', function ($scope, $http, $state) {
 
         })
         .error(function (data, status, headers, config) {
-            console.log("ProductList, Error:" + data);
+            log("ProductList, Error:" + data)
         });
+    // 查看商品详情
     $scope.viewProduct = function (productId) {
-        console.log("viewProduct(), productId=" + productId);
+        log("viewProduct(), productId=" + productId)
         $state.go("product_view", {productId: productId});
     };
-
+    // 编辑商品
     $scope.editProduct = function (productId) {
-        console.log("editProduct(), productId=" + productId);
+        log("editProduct(), productId=" + productId)
         $state.go("product_edit", {productId: productId});
     };
-
+    // 删除商品
     $scope.deleteProduct = function (productId) {
-        console.log("deleteProduct(), productId=" + productId);
+        log("deleteProduct(), productId=" + productId);
+
+        var deleteProductRequest = {
+            productId : productId
+        }
+        $http.post('product/delete', deleteProductRequest)
+            .success(function (data, status, headers, config) {
+                log(data);
+            })
+            .error(function (data, status, headers, config) {
+                log(data)
+            });
     }
 });
 
@@ -59,11 +71,11 @@ controllers.controller('ProductView', function ($scope, $http, $state, $statePar
 
     $http.get('product/view/' + productId)
         .success(function (data, status, headers, config) {
-            console.log(data);
+            log(data);
             $scope.product = data.product;
         })
         .error(function (data, status, headers, config) {
-            console.log(data)
+            log(data)
         });
 
     $scope.goBack = function () {
@@ -74,7 +86,7 @@ controllers.controller('ProductView', function ($scope, $http, $state, $statePar
 // 编辑商品
 controllers.controller('ProductEdit', function ($scope, $http, $stateParams) {
     var productId = $stateParams.productId;
-    console.log("ProductEdit, productId=" + productId)
+    log("ProductEdit, productId=" + productId)
 
     $scope.productId = productId;
 });
@@ -84,7 +96,7 @@ controllers.controller('AddProdcutCtrl', function ($scope, $http) {
     resetFormData();
 
     $scope.resetFormData = function () {
-        console.log("AddProdcutCtrl resetFormData");
+        log("AddProdcutCtrl resetFormData");
         resetFormData();
     }
 
@@ -97,7 +109,7 @@ controllers.controller('AddProdcutCtrl', function ($scope, $http) {
     }
 
     $scope.commit = function () {
-        console.log($scope.product)
+        log($scope.product)
 
         var addProductRequest = {
             product: $scope.product
@@ -105,11 +117,11 @@ controllers.controller('AddProdcutCtrl', function ($scope, $http) {
 
         $http.post('product/addProduct', addProductRequest)
             .success(function (data, status, headers, config) {
-                console.log(data);
+                log(data);
                 $scope.greeting = data;
             })
             .error(function (data, status, headers, config) {
-                console.log(data)
+                log(data)
             });
     }
 });
@@ -123,7 +135,7 @@ controllers.controller('UserInfoCtrl', function ($scope) {
         autoLogin: false
     }
     $scope.getUserInfo = function () {
-        console.log($scope.userInfo)
+        log($scope.userInfo)
     }
     $scope.resetUserInfo = function () {
         $scope.userInfo = {
@@ -145,3 +157,7 @@ controllers.controller('Test', function ($scope) {
 
     $scope.str = testJsonString;
 });
+
+function log(msg) {
+    console.log(msg)
+}

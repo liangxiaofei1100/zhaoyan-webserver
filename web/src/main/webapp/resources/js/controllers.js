@@ -60,7 +60,7 @@ controllers.controller('ProductView', function ($scope, $http, $state, $statePar
     $http.get('product/view/' + productId)
         .success(function (data, status, headers, config) {
             console.log(data);
-            $scope.product = data;
+            $scope.product = data.product;
         })
         .error(function (data, status, headers, config) {
             console.log(data)

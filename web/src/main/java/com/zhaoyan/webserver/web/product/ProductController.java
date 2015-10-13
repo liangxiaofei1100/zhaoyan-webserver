@@ -37,9 +37,9 @@ public class ProductController {
      */
     @RequestMapping(value = "/view/{productId}", method = RequestMethod.GET, produces = {"application/json;charset=UTF-8"})
     public @ResponseBody ViewProductResponse viewProductJson(@PathVariable("productId") Integer productId) {
-
-
-        return null;
+        ViewProductResponse response = productService.getProductById(productId);
+        logger.debug("viewProductJson: " + response);
+        return response;
     }
 
     /**

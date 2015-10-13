@@ -1,5 +1,6 @@
 var controllers = angular.module('Controllers', []);
 
+// 首页
 controllers.controller('GreetingController', function ($scope, $http) {
     $http({method: 'GET', url: 'common/greeting'})
         .success(function (data, status, headers, config) {
@@ -9,36 +10,6 @@ controllers.controller('GreetingController', function ($scope, $http) {
         .error(function (data, status, headers, config) {
             // alert("Error:"+data);
         });
-});
-
-controllers.controller('ProductList', function ($scope, $http, $location) {
-    $http({method: 'GET', url: 'product/list'})
-        .success(function (data, status, headers, config) {
-            //alert("Success:" + JSON.stringify(data));
-            $scope.productList = data.productList;
-
-        })
-        .error(function (data, status, headers, config) {
-            //alert("Error:" + data);
-        });
-    $scope.viewProduct = function(productId) {
-        console.log("viewProduct(), productId=" + productId);
-        $location.path("/product_view/" + productId);
-    };
-
-    $scope.editProduct = function(productId) {
-        console.log("editProduct(), productId=" + productId);
-    };
-
-    $scope.deleteProduct = function(productId) {
-        console.log("deleteProduct(), productId=" + productId);
-    }
-});
-
-controllers.controller('ProductView', function($scope, $http) {
-    //var productId = $routeParams.productId;
-    //console.log("ProductView, productId=" + productId);
-
 });
 
 controllers.controller('TimeController', function ($scope) {
@@ -55,24 +26,52 @@ controllers.controller('TimeController', function ($scope) {
     updateClock();
 });
 
-controllers.controller('UserInfoCtrl', function ($scope) {
-    $scope.userInfo = {
-        email: "",
-        password: "",
-        autoLogin: false
-    }
-    $scope.getUserInfo = function () {
-        console.log($scope.userInfo)
-    }
-    $scope.resetUserInfo = function () {
-        $scope.userInfo = {
-            email: "",
-            password: "",
-            autoLogin: false
-        }
+// 商品列表
+controllers.controller('ProductList', function ($scope, $http, $state) {
+    $http({method: 'GET', url: 'product/list'})
+        .success(function (data, status, headers, config) {
+            // console.log("ProductList, Success:" + JSON.stringify(data));
+            $scope.productList = data.productList;
+
+        })
+        .error(function (data, status, headers, config) {
+            console.log("ProductList, Error:" + data);
+        });
+    $scope.viewProduct = function(productId) {
+        console.log("viewProduct(), productId=" + productId);
+        $state.go("product_view", { productId: productId });
+    };
+
+    $scope.editProduct = function(productId) {
+        console.log("editProduct(), productId=" + productId);
+        $state.go("product_edit", { productId: productId });
+    };
+
+    $scope.deleteProduct = function(productId) {
+        console.log("deleteProduct(), productId=" + productId);
     }
 });
 
+// 商品详情
+controllers.controller('ProductView', function($scope, $http, $state, $stateParams, $window) {
+    var productId = $stateParams.productId;
+    console.log("ProductView, productId=" + productId);
+
+    $scope.goBack = function() {
+        console.log("goBack()")
+        $window.history.back();
+    };
+});
+
+// 编辑商品
+controllers.controller('ProductEdit', function($scope, $http, $stateParams) {
+    var productId = $stateParams.productId;
+    console.log("ProductEdit, productId=" + productId)
+
+    $scope.productId = productId;
+});
+
+// 添加商品
 controllers.controller('AddProdcutCtrl', function ($scope, $http) {
     resetFormData();
 
@@ -107,6 +106,27 @@ controllers.controller('AddProdcutCtrl', function ($scope, $http) {
     }
 });
 
+
+// 用户信息
+controllers.controller('UserInfoCtrl', function ($scope) {
+    $scope.userInfo = {
+        email: "",
+        password: "",
+        autoLogin: false
+    }
+    $scope.getUserInfo = function () {
+        console.log($scope.userInfo)
+    }
+    $scope.resetUserInfo = function () {
+        $scope.userInfo = {
+            email: "",
+            password: "",
+            autoLogin: false
+        }
+    }
+});
+
+// 测试
 controllers.controller('Test', function ($scope) {
     var testJson = {
         name : "Test name",

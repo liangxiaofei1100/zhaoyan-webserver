@@ -24,6 +24,10 @@ zhaoyanApp.config(function ($stateProvider, $urlRouterProvider) {
             url: '/product_add',
             templateUrl: 'resources/tpls/product_add.html'
         })
+        .state('product_edit', {
+            url: '/product_edit/:productId',
+            templateUrl: 'resources/tpls/product_edit.html'
+        })
         .state('userinfo', {
             url: "/userinfo",
             templateUrl: "resources/tpls/userinfo.html",
